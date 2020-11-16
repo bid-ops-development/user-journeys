@@ -4,7 +4,7 @@
     "staging": "http://bidops.staging.bidops.com",
     "production": "http://app.bidops.com"
   },
-  "personae": {
+  "persona": {
     "barbara": {
       "role": "buyer",
       "email": "buyer@bidops.com",
