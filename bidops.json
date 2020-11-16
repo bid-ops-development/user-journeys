@@ -1,0 +1,19 @@
+{
+  "environments": {
+    "local": "http://bidops.app.localhost:3000",
+    "staging": "http://bidops.staging.bidops.com",
+    "production": "http://app.bidops.com"
+  },
+  "personae": {
+    "barbara": {
+      "role": "buyer",
+      "email": "buyer@bidops.com",
+      "password": "hours~bridge~port~design"
+    },
+    "sam": {
+      "role": "supplier",
+      "email": "vendor@bidops.com",
+      "password": "hours~bridge~port~design"
+    }
+  }
+}

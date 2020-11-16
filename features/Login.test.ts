@@ -1,31 +1,39 @@
-// import puppeteer from 'puppeteer'
-import { getDocument, queries } from 'pptr-testing-library'
-const { getByLabelText, getByText } = queries
+import { login, logout } from "./support/Authentication";
+import * as bidops from '../bidops.json';
 
-describe('As a BidOps user', () => {
+const baseUrl = bidops.environments.local;
+const { sam, barbara } = bidops.personae;
+jest.setTimeout(10000)
+
+describe('Login', () => {
   beforeAll(async () => {
-    await page.goto('http://bidops.staging.bidops.com');
+    await page.setViewport({ width: 1024, height: 768 })
+    console.log(`[before:all] visit ${baseUrl}`)
+    await Promise.all([
+      page.waitForNavigation(),
+      page.goto(baseUrl),
+    ])
+  })
+
+  describe('as a buyer', () => {
+    beforeAll(async () => await login(page, barbara));
+    afterAll(async () => await logout(page))
+
+    describe('when I enter my credentials', () => {
+      it('should authenticate me', async () => {
+        expect(page.url()).toMatch(`/bid_requests`);
+      })
+    });
   });
 
-  describe('When I visit the app homepage', () => {
-    it('should be titled "BidOps"', async () => {
-      await expect(page.title()).resolves.toMatch('Bid Ops');
+  describe('as a supplier', () => {
+    beforeAll(async () => await login(page, sam));
+    afterAll(async () => await logout(page))
+
+    describe('when I enter my credentials', () => {
+      it('should authenticate me', async () => {
+        expect(page.url()).toMatch(`/bid_requests`);
+      })
     });
-
-    it('should authenticate me', async () => {
-      expect(page.url()).toEqual("http://bidops.staging.bidops.com/login")
-
-      const $document = await getDocument(page)
-      const $email = await getByLabelText($document, 'Enter Email')
-      const $pass = await getByLabelText($document, 'Enter Password')
-      const $submit = await getByText($document, 'Sign in')
-
-      await $email.type('buyer@bidops.com')
-      await $pass.type('hours~bridge~port~design')
-      await $submit.click()
-      await page.screenshot({ path: "./login.jpg", type: 'jpeg' })
-      await page.waitForNavigation()
-      expect(page.url()).toEqual("http://bidops.staging.bidops.com/bid_requests")
-    })
   });
 });

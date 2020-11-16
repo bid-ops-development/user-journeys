@@ -12,3 +12,7 @@ We use Jest for a testing DSL and Puppeteer to manage the headless chrome instan
 - [ ] Create a bid request
 - [ ] Login to the app as a supplier
 - [ ] Make a bid
+
+# Getting Started
+
+Clone the repo and `yarn install` for dependencies.
