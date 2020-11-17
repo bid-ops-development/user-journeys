@@ -5,7 +5,7 @@ import { config } from "../config";
 const { sam, barbara } = bidops.persona;
 const { baseUrl } = config;
 
-jest.setTimeout(10000)
+jest.setTimeout(60*1000)
 
 describe('Login', () => {
   beforeAll(async () => {

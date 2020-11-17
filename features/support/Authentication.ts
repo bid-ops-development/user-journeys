@@ -16,6 +16,7 @@ export const login = async (page: Page, { email, password, role }: UserProfile) 
     page.waitForNavigation(),
     $submit.click(),
   ])
+  await page.waitForTimeout(1000)
 }
 
 export const logout = async (page: Page) => {
