@@ -72,6 +72,8 @@ export class BidRequest {
     const $complete = await getByLabelText($document, 'Complete')
     await $complete.click();
 
+    // todo(jweissman) -- we could scan url and return the created bid id here
+
     await page.waitForTimeout(2000);
   }
 }

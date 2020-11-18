@@ -27,6 +27,15 @@ describe('Creating requests', () => {
       });
       
       expect(page.url()).toMatch(`/dashboard`)
+
+      if (page.url()) {
+        const matches = page.url() //.match("/bid_requests/(\d+)/dashboard")
+          .match("/bid_requests/(\\d+)/dashboard"); //[1]
+        if (matches) {
+          const bidRequestId = matches[1];
+          console.log("---> Created new bid request with id", bidRequestId)
+        }
+      }
     })
   })
 })
