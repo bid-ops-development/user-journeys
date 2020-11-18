@@ -3,14 +3,14 @@ import { queries, getDocument } from "pptr-testing-library"
 const { getByText, getByTestId, getByLabelText } = queries;
 
 type SpendCategory = 'Tail End Spend'
-type RequestOptions = {
+export type RequestAttributes = {
   title: string,
   description?: string,
   spendCategory?: SpendCategory
 }
 
 export class BidRequest {
-  static async create(page: Page, { title, description, spendCategory }: RequestOptions) {
+  static async create(page: Page, { title, description, spendCategory }: RequestAttributes) {
     console.log("[create-request] Creating request for " + title);
     const $document = await getDocument(page);
     const $newRequest = await getByText($document, 'New Request');
